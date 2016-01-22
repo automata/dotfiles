@@ -3,11 +3,11 @@
 set -e
 
 function update() {
-  apt-get update && apt-get upgrade -yy
+  sudo apt-get update && sudo apt-get upgrade -yy
 }
 
 function install_basic() {
-  apt-get install -y --no-install-recommends \
+  sudo apt-get install -y --no-install-recommends \
     curl \
     git \
     htop \
