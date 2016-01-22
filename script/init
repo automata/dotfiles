@@ -22,7 +22,8 @@ function install_basic() {
     libc6-dev \
     libtool \
     openssh-client \
-    rsync
+    rsync \
+    irssi
 }
 
 function bootstrap() {
