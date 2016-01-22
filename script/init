@@ -26,6 +26,17 @@ function install_basic() {
     irssi
 }
 
+function install_libs() {
+  sudo apt-get install -y --no-install-recommends \
+    libcairo2-dev \
+    libgif-dev \
+    libopencv-dev \
+    libjpeg8-dev \
+    libpango1.0-dev \
+    libblas-dev \
+    libfftw3-dev
+}
+
 function bootstrap() {
   mkdir src && mkdir src/{automata,the-grid,noflo}
 }
@@ -33,6 +44,7 @@ function bootstrap() {
 echo "Installing basic dependencies..."
 update
 install_basic
+install_libs
 echo "Creating working directories..."
 bootstrap
 
