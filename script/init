@@ -1,0 +1,31 @@
+#!/bin/bash
+
+set -e
+
+function update() {
+  apt-get update && apt-get upgrade -yy
+}
+
+function install_basic() {
+  apt-get install -y --no-install-recommends \
+    curl \
+    git \
+    htop \
+    make \
+    tmux \
+    vim \
+    autoconf \
+    build-essential \
+    gdb \
+    ctags \
+    indent \
+    libc6-dev \
+    libtool \
+    openssh-client \
+    rsync
+}
+
+echo "Installing basic dependencies..."
+update
+install_basic
+
