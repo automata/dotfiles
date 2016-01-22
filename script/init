@@ -25,7 +25,13 @@ function install_basic() {
     rsync
 }
 
+function bootstrap() {
+  mkdir src && mkdir src/{automata,the-grid,noflo}
+}
+
 echo "Installing basic dependencies..."
 update
 install_basic
+echo "Creating working directories..."
+bootstrap
 
