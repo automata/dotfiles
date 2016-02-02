@@ -1,15 +1,44 @@
+# Enable mouse selections
+set-option -g mouse-select-pane on
+set-option -g mouse-select-window on
+set-option -g mouse-resize-pane on
+set-window-option -g mode-mouse on
+
+# Start window/session index at 1
+set-option -g base-index 1
+setw -g pane-base-index 1
+set -g pane-border-fg '#666666'
+set -g pane-active-border-fg '#aaaaaa'
+set -g pane-active-border-bg default
+
+# Easier splits
+bind | split-window -h
+bind - split-window -v
+
 # Improve colors
 set -g default-terminal "screen-256color"
+
+# UTF8
+setw -g utf8 on
 
 # soften status bar color from harsh green to light gray
 set -g status-bg '#666666'
 set -g status-fg '#aaaaaa'
 
-# remove administrative debris (session name, hostname, time) in status bar
+# Status Bar
+set -g status-utf8 on
+setw -g monitor-activity on
+set -g visual-activity on
+
+# Force a reload of the config file
+unbind r
+bind r source-file ~/.tmux.conf
+
+# Remove administrative debris (session name, hostname, time) in status bar
 set -g status-left ''
 set -g status-right ''
 
-# act like vim
+# Act like vim
 setw -g mode-keys vi
 bind h select-pane -L
 bind j select-pane -D
@@ -17,3 +46,14 @@ bind k select-pane -U
 bind l select-pane -R
 bind-key -r C-h select-window -t :-
 bind-key -r C-l select-window -t :+
+
+# Fix delay when sending escape key
+set -sg escape-time 0
+
+# TPM plugins
+set -g @plugin 'tmux-plugins/tpm'
+#set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+
+run '~/.tmux/plugins/tpm/tpm'
