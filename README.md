@@ -2,6 +2,16 @@
 
 Based on work of [Holman](http://zachholman.com/2010/08/dotfiles-are-meant-to-be-forked/).
 
+## Fresh install
+
+On a new Ubuntu (tested on 14.04 for now), first setup a safe SSH and then run
+the following `init` script to install all dependencies (including git itself) and
+bootstrap the work env:
+
+```sh
+bash <(wget -qO- https://raw.githubusercontent.com/automata/dotfiles/master/script/init) 2>&1
+```
+
 ## Install
 
 Run this:
