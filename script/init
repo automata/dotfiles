@@ -45,7 +45,18 @@ function install_tmux() {
 }
 
 function bootstrap() {
+  echo "- Creating source directories for all projects I work on"
   mkdir src && mkdir src/{automata,the-grid,noflo}
+  echo "Fetching dotfiles"
+  git clone https://github.com/automata/dotfiles.git ~/src/automata/dotfiles
+  echo "Configuring Vim"
+  ln -s ~/src/automata/dotfiles/vim/vimrc.symlink ~/.vimrc
+  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  vim +PluginInstall +qall
+  echo "Configuring Git"
+  ln -s ~/src/automata/dotfiles/git/gitconfig.symlink ~/.gitconfig
+  echo "Configuring Tmux"
+  ln -s ~/src/automata/dotfiles/tmux/tmux.symlink ~/.tmux.conf
 }
 
 echo "Installing basic dependencies..."
@@ -53,6 +64,6 @@ update
 install_basic
 install_libs
 install_tmux
-echo "Creating working directories..."
+echo "Bootstraping work environment..."
 bootstrap
-
+echo "Type tmux and hack the planet ;-)"
