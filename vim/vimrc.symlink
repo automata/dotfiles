@@ -71,3 +71,7 @@ set nowrap                            " Don't wrap lines
 " ===========
 set laststatus=2
 let g:airline_powerline_fonts = 1
+
+" Markdown
+" ========
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
