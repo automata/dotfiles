@@ -15,6 +15,9 @@ set -g pane-active-border-bg default
 bind | split-window -h
 bind - split-window -v
 
+# C-b C-b go to last window
+bind-key C-b last-window
+
 # Improve colors
 set -g default-terminal "screen-256color"
 
@@ -50,6 +53,9 @@ bind-key -r C-l select-window -t :+
 # Fix delay when sending escape key
 set -sg escape-time 0
 
+# Restore sessions with tmux-continuum
+set -g @continuum-restore 'on'
+
 # TPM plugins
 set -g @plugin 'tmux-plugins/tpm'
 #set -g @plugin 'tmux-plugins/tmux-sensible'
@@ -57,3 +63,4 @@ set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-continuum'
 
 run '~/.tmux/plugins/tpm/tpm'
+
