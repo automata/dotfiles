@@ -15,8 +15,8 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'kchmck/vim-coffee-script'
 " VIm Airline
 Plugin 'bling/vim-airline'
-" Solarized colors
-Plugin 'altercation/vim-colors-solarized'
+" Base16 colorscheme
+Plugin 'chriskempson/base16-vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -24,15 +24,15 @@ filetype plugin indent on    " required
 " Syntax highlight
 " ================
 
-syntax on                  " Turn on syntax highlight
-syntax enable              " Enable syntax highlight
-set t_Co=256               " Syntax highlight should be in 256 colors
+syntax on                          " Turn on syntax highlight
+syntax enable                      " Enable syntax highlight
+set t_Co=256                       " Syntax highlight should be in 256 colors
 if $COLORTERM == 'gnome-terminal'
   set t_Co=256
 endif
-set background=dark
-let g:solarized_termcolors=256
-colorscheme solarized
+set background=dark                " Requested for dark color schemes
+let base16colorspace=256           " Access colors present in 256 colorspace
+colorscheme base16-tomorrow        " Base16 Tomorrow colorscheme
 
 " General Settings
 " ================
