@@ -57,6 +57,12 @@ function bootstrap() {
   ln -s ~/src/automata/dotfiles/git/gitconfig.symlink ~/.gitconfig
   echo "Configuring Tmux"
   ln -s ~/src/automata/dotfiles/tmux/tmux.symlink ~/.tmux.conf
+  echo "Configuring Base16 colorscheme on shell"
+  git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
+  echo "Configuring Base16 (Tomorrow) colorscheme on gnome-terminal"
+  git clone https://github.com/chriskempson/base16-gnome-terminal.git ~/.config/base16-gnome-terminal
+  source ~/.config/base16-gnome-terminal/base16-tomorrow.dark.sh
+  echo "** Open gnome-terminal and choose Base 16 Tomorrow Dark profile, and set as default on preferences **"
 }
 
 echo "Installing basic dependencies..."
