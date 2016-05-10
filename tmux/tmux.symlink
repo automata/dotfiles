@@ -40,6 +40,8 @@ bind r source-file ~/.tmux.conf
 # Remove administrative debris (session name, hostname, time) in status bar
 set -g status-left ''
 set -g status-right ''
+# Stop renaming panels automatically
+set-option -g allow-rename off
 
 # Act like vim
 setw -g mode-keys vi
