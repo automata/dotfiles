@@ -1,12 +1,9 @@
 " Vundle
 " ======
 
-" Be vIMproved
-set nocompatible
-" Required for Vundle
-filetype off
-" Set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+set nocompatible                       " Be vIMproved
+filetype off                           " Required for Vundle
+set rtp+=~/.vim/bundle/Vundle.vim      " Set the runtime path to include Vundle
 call vundle#begin()
 
 " Let Vundle manage Vundle, required
@@ -17,33 +14,48 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'bling/vim-airline'
 " Base16 colorscheme
 Plugin 'chriskempson/base16-vim'
+" Tmuxline
+Bundle 'edkolev/tmuxline.vim'
+" Nerd commenter
+Bundle 'The-NERD-Commenter'
+" Multiple cursors
+Bundle 'terryma/vim-multiple-cursors'
 
-call vundle#end()            " required
-filetype plugin indent on    " required
+call vundle#end()                      " Required
+filetype plugin indent on              " Required
 
 " Syntax highlight
 " ================
 
-syntax on                          " Turn on syntax highlight
-syntax enable                      " Enable syntax highlight
-set t_Co=256                       " Syntax highlight should be in 256 colors
-if $COLORTERM == 'gnome-terminal'
-  set t_Co=256
-endif
-set background=dark                " Requested for dark color schemes
-let base16colorspace=256           " Access colors present in 256 colorspace
-colorscheme base16-tomorrow        " Base16 Tomorrow colorscheme
+syntax on                              " Turn on syntax highlight
+syntax enable                          " Enable syntax highlight
+set background=dark                    " Requested for dark color schemes
+let base16colorspace=256               " Access colors in 256 colorspace
+set t_Co=256
+colorscheme base16-tomorrow            " Base16 Tomorrow colorscheme
 
 " General Settings
 " ================
 
-set history=100            " Store last 100 commands
-set number                 " Add number lines
-set encoding=utf-8         " Standard encoding
-set autoread               " Reload files changed outside vim
-set hidden                 " Buffers can exist in the background
-set re=1                   " Use a non-broken regex engine for syntax highlighting
-set mouse=a                " Enable mouse in all modes
+set history=1000                       " Store last 1000 commands
+set undolevels=1000                    " Store last 1000 actions
+set nonumber                           " Remove line numbers
+set encoding=utf-8                     " Standard encoding
+set autoread                           " Reload files changed outside vim
+set hidden                             " Buffers can exist in the background
+set re=1                               " Use a non-broken regex search engine
+set mouse=a                            " Enable mouse in all modes
+set hlsearch                           " Highlight search pattern (:noh cleans)
+set incsearch                          " Start highlighting search while typing
+set scrolloff=3                        " Show lines before/after while scroll
+set wildmenu                           " Show menu completion on top of status
+set undofile                           " Save undo history btw sessions
+
+" Search
+" ======
+
+set ignorecase
+set smartcase
 
 " No more swap files
 " ==================
@@ -58,20 +70,60 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 " ===========
 
 set autoindent
+set copyindent
 set smartindent
 set smarttab
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 set expandtab
-set list listchars=tab:\ \ ,trail:·   " Display tabs and trailing spaces visually
-set nowrap                            " Don't wrap lines
+set list listchars=tab:\ \ ,trail:·    " Display tabs and trailing spaces
+set nowrap                             " Don't wrap lines
+set textwidth=79
+set colorcolumn=80                     " Paint 80th column
+
+" Split navigation
+" ================
+
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " Vim Airline
 " ===========
+
 set laststatus=2
 let g:airline_powerline_fonts = 1
+let g:airline_left_sep=''              " Do not use those cute > separators
+let g:airline_left_alt_sep=''
+let g:airline_right_sep=''
+let g:airline_right_alt_sep=''
+
+" TmuxLine
+" ========
+
+" Make it sure we do not use cute > separators
+let g:tmuxline_separators = {
+    \ 'left' : '',
+    \ 'left_alt': '',
+    \ 'right' : '',
+    \ 'right_alt' : '',
+    \ 'space' : ' '}
+
+" Personalize tmux line a bit
+let g:tmuxline_preset = {
+      \'a'    : '#S',
+      \'b'    : '',
+      \'c'    : '',
+      \'win'  : '#I #W',
+      \'cwin' : '#I #W',
+      \'x'    : '',
+      \'y'    : '#(date)',
+      \'z'    : '#H',
+      \'options' : {'status-justify' : 'left'}}
 
 " Markdown
 " ========
+
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
