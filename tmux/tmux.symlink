@@ -1,9 +1,3 @@
-# Enable mouse selections
-set-option -g mouse-select-pane on
-set-option -g mouse-select-window on
-set-option -g mouse-resize-pane on
-set-window-option -g mode-mouse on
-
 # Start window/session index at 1
 set-option -g base-index 1
 setw -g pane-base-index 1
@@ -12,8 +6,9 @@ set -g pane-active-border-fg '#aaaaaa'
 set -g pane-active-border-bg default
 
 # Easier splits
-bind | split-window -h
-bind - split-window -v
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+bind c new-window -c "#{pane_current_path}"
 
 # C-b C-b go to last window
 bind-key C-b last-window
@@ -21,15 +16,11 @@ bind-key C-b last-window
 # Improve colors
 set -g default-terminal "screen-256color"
 
-# UTF8
-setw -g utf8 on
-
 # soften status bar color from harsh green to light gray
 set -g status-bg '#666666'
 set -g status-fg '#aaaaaa'
 
 # Status Bar
-set -g status-utf8 on
 setw -g monitor-activity on
 set -g visual-activity on
 

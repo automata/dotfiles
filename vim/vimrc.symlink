@@ -1,3 +1,4 @@
+
 " Daily VIM Commands
 " ===================
 " ESC C-w w                            Go back and forth Nerd Tree
@@ -16,22 +17,32 @@ call vundle#begin()
 
 " Let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-" CoffeeScript plugin
-Plugin 'kchmck/vim-coffee-script'
-" VIm Airline
+" VIm Airline and themes
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 " Base16 colorscheme
-Plugin 'chriskempson/base16-vim'
+"Plugin 'chriskempson/base16-vim'
+" Molokai colorscheme
+Plugin 'tomasr/molokai'
 " Nerd tree
 Plugin 'scrooloose/nerdtree'
+"Plugin 'flazz/vim-colorschemes'
 " Tmuxline
 Bundle 'edkolev/tmuxline.vim'
+" Git gutter
+Plugin 'airblade/vim-gitgutter'
 " Nerd commenter
 Bundle 'The-NERD-Commenter'
 " Multiple cursors
 Bundle 'terryma/vim-multiple-cursors'
 " CtrlP
 Bundle 'ctrlpvim/ctrlp.vim'
+" JSX support
+Plugin 'mxw/vim-jsx'
+" JavaScript support
+Plugin 'pangloss/vim-javascript'
+" CoffeeScript plugin
+Plugin 'kchmck/vim-coffee-script'
 
 call vundle#end()                      " Required
 filetype plugin indent on              " Required
@@ -41,10 +52,13 @@ filetype plugin indent on              " Required
 
 syntax on                              " Turn on syntax highlight
 syntax enable                          " Enable syntax highlight
-set background=dark                    " Requested for dark color schemes
-let base16colorspace=256               " Access colors in 256 colorspace
+"let base16colorspace=256               " Access colors in 256 colorspace
 set t_Co=256
-colorscheme base16-tomorrow            " Base16 Tomorrow colorscheme
+"colorscheme base16-tomorrow            " Base16 Tomorrow colorscheme
+colorscheme molokai
+"let g:molokai_original = 1
+let g:rehash256 = 1
+set background=dark                    " Requested for dark color schemes
 
 " General Settings
 " ================
@@ -52,22 +66,31 @@ colorscheme base16-tomorrow            " Base16 Tomorrow colorscheme
 set history=1000                       " Store last 1000 commands
 set undolevels=1000                    " Store last 1000 actions
 set number                             " Toggle line numbers
+set relativenumber                     " Show line numbers relative to current line
 set encoding=utf-8                     " Standard encoding
 set autoread                           " Reload files changed outside vim
 set hidden                             " Buffers can exist in the background
 set mouse=a                            " Enable mouse in all modes
-set hlsearch                           " Highlight search pattern (:noh cleans)
-set incsearch                          " Start highlighting search while typing
 set scrolloff=3                        " Show lines before/after while scroll
 set wildmenu                           " Show menu completion on top of status
 set undofile                           " Save undo history btw sessions
 set undodir=~/.vim-tmp                 " Save undo files (.un~) on specific dir
+set ruler                              " Show lines/columns counters on status bar
+let mapleader = ","
+
+" MacOS integration (needs brew install vim)
+" =================
+set clipboard=unnamed                  " Yanks to system clipboard
 
 " Search
 " ======
 
-set ignorecase
-set smartcase
+set hlsearch                           " Highlight search pattern (:noh cleans)
+set incsearch                          " Start highlighting search while typing
+set showmatch                          " Show match numbers
+set ignorecase                         " Search case-insensitive
+set smartcase                          " Except when forcing case-sensitivity
+nnoremap <CR> :noh<CR><CR>
 
 " No more swap files
 " ==================
@@ -86,14 +109,15 @@ set autoindent
 set copyindent
 set smartindent
 set smarttab
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
-set expandtab
-set list listchars=tab:\ \ ,trail:·    " Display tabs and trailing spaces
-set nowrap                             " Don't wrap lines
+set shiftwidth=2                            " Tab is two stops
+set softtabstop=2                           " The same
+set tabstop=2                               " The same
+set expandtab                               " Use spaces, not tabs
+set list listchars=tab:▸\ ,trail:·          " Display tabs and trailing spaces
+set nowrap                                  " Don't wrap lines
 set textwidth=79
-"set colorcolumn=80                    " Paint 80th column
+"set colorcolumn=80                         " Paint 80th column
+set backspace=indent,eol,start              " Backspace through everything
 
 " Split navigation
 " ================
@@ -110,10 +134,33 @@ set splitright                         " Open new splits to the right by default
 " =========
 nnoremap <C-e> :NERDTreeToggle<CR>Vim
 
+" Nerd commenter
+" ==============
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
 " Vim Airline
 " ===========
 
 set laststatus=2
+let g:airline_theme='distinguished'
+let g:airline#extensions#tabline#enabled = 1           " Enable list of buffers on top
+let g:airline#extensions#tabline#fnamemod = ':t'       " Show only file name on buffer
+let g:airline#extensions#tabline#buffer_idx_mode = 1   " Show buffer number
+let g:airline#extensions#tabline#buffers_label = 'b'   " Rename buffers to b
+let g:airline#extensions#tabline#tabs_label = 't'      " Rename tabs to t
 let g:airline_powerline_fonts = 1
 let g:airline_left_sep=''              " Do not use those cute > separators
 let g:airline_left_alt_sep=''
@@ -143,7 +190,15 @@ let g:tmuxline_preset = {
       \'z'    : '#H',
       \'options' : {'status-justify' : 'left'}}
 
+" ~~~~~~~~~~~~~~~~~~~~~~~~~
+" Language specific configs
+" ~~~~~~~~~~~~~~~~~~~~~~~~~
+
 " Markdown
 " ========
 
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" JSX
+" ===
+"let g:jsx_ext_required = 0 " Allow JSX in normal JS files
