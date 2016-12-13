@@ -1,18 +1,6 @@
-
-" Daily VIM Commands
-" ===================
-" ESC C-w w                            Go back and forth Nerd Tree
-" ESC \ c <Space>                      Toggle comment on selected region
-" ESC \ cc                             Comment
-" ESC \ cl                             Comment, aligned
-" ESC \ cu                             Uncomment
-
-" Vundle
-" ======
-
-set nocompatible                       " Be vIMproved
-filetype off                           " Required for Vundle
-set rtp+=~/.vim/bundle/Vundle.vim      " Set the runtime path to include Vundle
+set nocompatible                       " be vimproved
+filetype off                           " required for vundle
+set rtp+=~/.vim/bundle/vundle.vim      " set the runtime path to include vundle
 call vundle#begin()
 
 " Let Vundle manage Vundle, required
@@ -21,12 +9,9 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 " Base16 colorscheme
-"Plugin 'chriskempson/base16-vim'
-" Molokai colorscheme
-Plugin 'tomasr/molokai'
+Plugin 'chriskempson/base16-vim'
 " Nerd tree
 Plugin 'scrooloose/nerdtree'
-"Plugin 'flazz/vim-colorschemes'
 " Tmuxline
 Bundle 'edkolev/tmuxline.vim'
 " Git gutter
@@ -43,6 +28,10 @@ Plugin 'mxw/vim-jsx'
 Plugin 'pangloss/vim-javascript'
 " CoffeeScript plugin
 Plugin 'kchmck/vim-coffee-script'
+" Git
+Plugin 'tpope/vim-fugitive'
+" Auto insert delimiters
+Plugin 'Raimondi/delimitMate'
 
 call vundle#end()                      " Required
 filetype plugin indent on              " Required
@@ -52,14 +41,13 @@ filetype plugin indent on              " Required
 
 syntax on                              " Turn on syntax highlight
 syntax enable                          " Enable syntax highlight
-"let base16colorspace=256               " Access colors in 256 colorspace
+let base16colorspace=256               " Access colors in 256 colorspace
 set t_Co=256
-"colorscheme base16-tomorrow            " Base16 Tomorrow colorscheme
-colorscheme molokai
-"let g:molokai_original = 1
-let g:rehash256 = 1
 set background=dark                    " Requested for dark color schemes
-
+"colorscheme solarized
+colorscheme base16-tomorrow            " Base16 Tomorrow colorscheme
+"colorscheme molokai
+"
 " General Settings
 " ================
 
@@ -116,7 +104,7 @@ set expandtab                               " Use spaces, not tabs
 set list listchars=tab:▸\ ,trail:·          " Display tabs and trailing spaces
 set nowrap                                  " Don't wrap lines
 set textwidth=79
-"set colorcolumn=80                         " Paint 80th column
+"set colorcolumn=80                          " Paint 80th column
 set backspace=indent,eol,start              " Backspace through everything
 
 " Split navigation
@@ -166,6 +154,17 @@ let g:airline_left_sep=''              " Do not use those cute > separators
 let g:airline_left_alt_sep=''
 let g:airline_right_sep=''
 let g:airline_right_alt_sep=''
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
+nmap <leader>- <Plug>AirlineSelectPrevTab
+nmap <leader>+ <Plug>AirlineSelectNextTab
 
 " TmuxLine
 " ========
